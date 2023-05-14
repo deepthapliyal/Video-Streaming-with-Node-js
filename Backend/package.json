@@ -1,21 +1,13 @@
 {
-  "name": "videostreaming",
+  "name": "backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is a web application that enables users to play a video file using a custom video player. The project consists of two parts: a frontend application and a backend server. The frontend application is responsible for displaying the video player and sending a request to the backend server to retrieve the video file. The backend server streams the video file to the client in chunks to enable efficient and responsive playback.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/deepthapliyal/Video-Streaming-with-Node-js.git"
-  },
-  "author": "deepthapliyal",
+  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/deepthapliyal/Video-Streaming-with-Node-js/issues"
-  },
-  "homepage": "https://github.com/deepthapliyal/Video-Streaming-with-Node-js#readme",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2",
