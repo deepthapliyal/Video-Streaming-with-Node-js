@@ -19,13 +19,13 @@ To get started with the video player web application, follow these steps:
 1. Clone the repository to your local machine:
 
 ```
-git clone https://github.com/your-username/video-player.git
+git clone https://github.com/deepthapliyal/Video-Streaming-with-Node-js.git
 ```
 
 2. Install the dependencies for the backend server:
 
 ```
-cd video-player
+cd Backend
 npm install
 ```
 
