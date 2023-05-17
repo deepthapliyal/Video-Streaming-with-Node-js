@@ -1,37 +1,74 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Video Player</title>
-  </head>
-  <body>
-    <video id="videoPlayer" width="640" height="360" controls></video>
+<head>
+  <meta charset="UTF-8">
+  <title>Video Player</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f9f9f9;
+      font-family: Arial, sans-serif;
+    }
 
-    <script>
-      const videoPlayer = document.getElementById('videoPlayer');
-      const videoUrl = 'http://localhost:8000/video';
+    .video-container {
+      max-width: 800px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
 
-      fetch(videoUrl)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          const rangeHeader = response.headers.get('content-range');
-          const fileSize = rangeHeader ? parseInt(rangeHeader.split('/')[1], 10) : response.headers.get('content-length');
-          videoPlayer.setAttribute('src', videoUrl);
-          videoPlayer.setAttribute('type', 'video/mp4');
-          videoPlayer.setAttribute('data-file-size', fileSize);
-          videoPlayer.load();
-        })
-        .catch(error => {
-          console.error(error);
-          videoPlayer.innerHTML = 'An error occurred while loading the video.';
-        });
+    #videoPlayer {
+      width: 100%;
+      height: auto;
+      background-color: #000;
+    }
 
-      videoPlayer.addEventListener('error', event => {
-        console.error(`Video player error: ${event.target.error.code}`);
-        videoPlayer.innerHTML = 'An error occurred while playing the video.';
+    .error-message {
+      color: red;
+      text-align: center;
+      font-size: 18px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="video-container">
+    <video id="videoPlayer" controls></video>
+    <p class="error-message"></p>
+  </div>
+
+  <script>
+    const videoPlayer = document.getElementById('videoPlayer');
+    const errorMessage = document.querySelector('.error-message');
+    const videoUrl = 'http://localhost:8000/video';
+
+    fetch(videoUrl)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const rangeHeader = response.headers.get('content-range');
+        const fileSize = rangeHeader ? parseInt(rangeHeader.split('/')[1], 10) : response.headers.get('content-length');
+        videoPlayer.setAttribute('src', videoUrl);
+        videoPlayer.setAttribute('type', 'video/mp4');
+        videoPlayer.setAttribute('data-file-size', fileSize);
+        videoPlayer.load();
+      })
+      .catch(error => {
+        console.error(error);
+        errorMessage.innerHTML = 'An error occurred while loading the video.';
       });
-    </script>
-  </body>
+
+    videoPlayer.addEventListener('error', event => {
+      console.error(`Video player error: ${event.target.error.code}`);
+      errorMessage.innerHTML = 'An error occurred while playing the video.';
+    });
+  </script>
+</body>
 </html>
+
+
